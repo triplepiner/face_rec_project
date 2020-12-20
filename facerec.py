@@ -81,11 +81,12 @@ for (top, right, bottom, left), face_encoding in zip(face_locations, face_encodi
     # Or instead, use the known face with the smallest distance to the new face
     face_distances = face_recognition.face_distance(known_face_encodings, face_encoding)
     best_match_index = np.argmin(face_distances)
+    second_best_match_index = np.argmax(face_distances)
     if matches[best_match_index]:
         name = known_face_names[best_match_index]
-
+        name2 = known_face_names[second_best_match_index]
     f = open('name.txt', 'w')
-    f.write(f'{name} ')
+    f.write(f'{name} {name2}')
     f.close()
     # Draw a box around the face using the Pillow module
     draw.rectangle(((left, top), (right, bottom)), outline=(0, 0, 255))
